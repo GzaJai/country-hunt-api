@@ -4,7 +4,7 @@ from fastapi import FastAPI
 
 import json, random
 
-with open('./countries.json', 'r') as file:
+with open('https://github.com/GzaJai/country-hunt-api/blob/main/countries-api/countries.json', 'r') as file:
     countries =  json.load(file)
 
 keys_list = list(countries.keys())
