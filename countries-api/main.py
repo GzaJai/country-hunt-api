@@ -1,27 +1,17 @@
-from typing import Union
-
-from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi import FastAPI
 from handlers import get_response
+from typing import Union
 
 app = FastAPI()
 
-# Set up CORS
-origins = [
-    "http://localhost",
-    "http://localhost:8000",
-    "http://localhost:5173",
-    "https://*.vercel.app",
-    # Add more origins as needed
-]
-
+# Set up CORS to allow all origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # Allows all origins
+    allow_origins=["*"],  # Allows all origins
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers (Authorization, Content-Type, etc.)
 )
 
 @app.get("/")
