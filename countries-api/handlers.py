@@ -1,6 +1,6 @@
 import json, random
 
-with open('./countries.json', 'r') as file:
+with open('countries-api/countries.json', 'r') as file:
     countries =  json.load(file)
 
 keys_list = list(countries.keys())

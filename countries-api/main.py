@@ -1,54 +1,28 @@
 from typing import Union
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-import json, random
-
-with open('countries-api/countries.json', 'r') as file:
-    countries =  json.load(file)
-
-keys_list = list(countries.keys())
-
-def get_country():
-    '''Get a random country key'''
-    random_int = random.randint(0, len(keys_list))
-    return keys_list[random_int]
-
-
-def get_countries_options():
-    '''Returns a list of countries keys'''
-    options = []
-    
-    while len(options) < 4:
-        option = get_country()
-        if option not in options:
-            options.append(countries[option])
-
-    return options
-
-def get_key_by_value(d, value):
-    for key, val in d.items():
-        if val == value:
-            return key
-    return None
-
-def get_response():
-    options_list = get_countries_options()
-    correct_aswer = options_list[0]
-
-    random.shuffle(options_list)
-
-    flag_url = f'https://flagpedia.net/data/flags/w580/{get_key_by_value(countries, correct_aswer)}.webp'
-
-    response = {
-        'variants': options_list,
-        'correct_answer': correct_aswer,
-        'flag': flag_url
-    }
-
-    return response
+from handlers import get_response
 
 app = FastAPI()
+
+# Set up CORS
+origins = [
+    "http://localhost",
+    "http://localhost:8000",
+    "http://localhost:5173",
+    "https://*.vercel.app",
+    # Add more origins as needed
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.get("/")
 def read_root():
