@@ -1,12 +1,16 @@
 {
-    "builds": [{
+    "version": 2,
+    "builds": [
+      {
         "src": "countries-api/main.py",
         "use": "@vercel/python"
-    }],
+      }
+    ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "countries-api/main.py"
-        }
+      {
+        "src": "/(.*)",
+        "dest": "countries-api/main.py"
+      }
     ]
-}
+  }
+  
