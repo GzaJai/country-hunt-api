@@ -6,7 +6,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "countries-api/main.app"
+            "dest": "countries-api/main.py"
         }
     ]
 }
